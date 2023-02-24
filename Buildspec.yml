@@ -1,26 +1,33 @@
 version: 0.2
+
+env:
+
 phases:
   install:
-    runtime-versions:
-      nodejs: 16
     commands:
-      - npm install -g typescript
-      - npm install
+      - echo Entered the install phase...
+      - apt-get update -y
+      - apt-get install -y maven
+    finally:
+      - echo This always runs even if the update or install command fails 
   pre_build:
     commands:
-      - echo Installing source NPM dependencies...
+      - echo Entered the pre_build phase...
+      - cd server/harvest
+    finally:
+      - echo This always runs even if the login command fails 
   build:
     commands:
+      - echo Entered the build phase...
       - echo Build started on `date`
-      - tsc
-      - npm prune --production
-    post_build:
-      commands:
-        - echo Build completed on `date`  
+      - mvn package
+    finally:
+      - echo This always runs even if the install command fails
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Build completed on `date`
 artifacts:
-  type: zip
   files:
-    - package.json
-    - package-lock.json
-    - "build/**/*"
-    - .ebextensions/**/*
+    - target/harvest-1.0-SNAPSHOT.jar
+  discard-paths: yes
