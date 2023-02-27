@@ -29,3 +29,6 @@ jobs:
         #cache-dependency-path: './opt/hostedtoolcache/node/16.19.1/x64'
     - run: npm ci
     - run: npm test
+    working-directory: './server'
+    - run: npm run start
+      working-directory: './server'
