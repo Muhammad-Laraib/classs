@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: './opt/hostedtoolcache/node/16.19.1/x64'
+        cache-dependency-path: './opt/hostedtoolcache/node/16.19.1/x64/bin/npm'
     - run: npm ci
     - run: npm test
