@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: '.package-lock.json,npm-shrinkwrap.json,yarn.lock'
+        cache-dependency-path: './usr/local/bin/npm'
     - run: npm ci
     - run: npm test
